@@ -237,7 +237,7 @@ function addToCart(element){
   const currentItemsIndex = currentItems.findIndex(item=>item.id===products[element.id].id);
 
   if(currentItems.some(item=>item.id === products[element.id].id)){
-    products[element.id].orderQuantity += 1;
+    
     currentItems[currentItemsIndex].orderQuantity++;
     
     
@@ -246,7 +246,7 @@ function addToCart(element){
   else{
     
     currentItems.push(products[element.id]);
-    currentItems[currentItemsIndex].orderQuantity++
+    currentItems[currentItems.length-1].orderQuantity++
    
   }
 
