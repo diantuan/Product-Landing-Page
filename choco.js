@@ -234,17 +234,19 @@ getSavedData();
 
 function addToCart(element){
 
+  const currentItemsIndex = currentItems.findIndex(item=>item.id===products[element.id].id);
+
   if(currentItems.some(item=>item.id === products[element.id].id)){
     products[element.id].orderQuantity += 1;
-    console.log(products[element.id].orderQuantity);
+    currentItems[currentItemsIndex].orderQuantity++;
+    
     
     
   }
   else{
     
-    products[element.id].orderQuantity += 1;
     currentItems.push(products[element.id]);
-  
+    currentItems[currentItemsIndex].orderQuantity++
    
   }
 
