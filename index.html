@@ -88,15 +88,17 @@
 
 
     <section id="contact">
-
-      <h2>CONTACT US</h2>
+      
+      <h2 id="contactUs">CONTACT US</h2>
 
       <form method="post" id="form">
         <label for="user-name">Name:</label>
-        <input id="user-name" type="text">
+        <input id="user-name" type="text" placeholder="name" name="username">
         <label for="email">Email:</label>
-        <input id="email" type="email" placeholder="email@email.com"> 
-        <submit id="submit">Submit</submit>
+        <input id="email" type="email" placeholder="email@email.com" name="email"> 
+        <label for="comments"></label>
+        <textarea rows="6" id="comments" placeholder="comments" name="comments"></textarea>
+        <button id="submit" type="submit">Submit</button>
       </form>
 
     </section>
