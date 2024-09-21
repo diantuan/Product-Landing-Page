@@ -169,19 +169,19 @@ const productShow = document.getElementById("product-show");
 
 const productContainer = document.getElementById("product-container");
 
-const displayProdutcs = () =>{
+const displayProducts = () =>{
   
   productContainer.innerHTML = products.map(product=>`<img src="${product.src}" onclick="selectProduct(this)" id="${product.id}">`).join("")
 }
 
-displayProdutcs();
+displayProducts();
 
 
 function selectProduct(select){
 
   select.style.opacity="100%";
 
- const productIndex =  products.findIndex(product => {
+  const productIndex =  products.findIndex(product => {
     return Number(select.id) === product.id
     
   });
@@ -205,15 +205,39 @@ function selectProduct(select){
 
 let currentItems = [];
 
-
 const cartItems = document.getElementById("cart-items");
+
+// get data from local storage
+
+const getSavedData = ()=>{
+
+  const savedCart = localStorage.getItem("cart-items");
+
+  if(savedCart){
+  const savedCartArray = JSON.parse(savedCart);
+
+  currentItems = savedCartArray;
+
+    if(savedCartArray.length > 0){
+      displayCart(currentItems);
+      
+    }
+  }
+}
+
+getSavedData();
+
+
+
+
+
 
 function addToCart(element){
 
-  if(currentItems.includes(products[element.id])){
+  if(currentItems.some(item=>item.id === products[element.id].id)){
     products[element.id].orderQuantity += 1;
+    console.log(products[element.id].orderQuantity);
     
-    displayCart();
     
   }
   else{
@@ -221,15 +245,20 @@ function addToCart(element){
     products[element.id].orderQuantity += 1;
     currentItems.push(products[element.id]);
   
-    displayCart();
+   
   }
 
-
+  console.log(currentItems) 
+  localStorage.setItem("cart-items", JSON.stringify(currentItems));
+  displayCart(currentItems);
+  
 }
 
-function displayCart(){
-  const itemHTML = currentItems.map(item=>{
+
+function displayCart(itemsArray){
+  const itemHTML = itemsArray.map(item=>{
     return ` <div id="current-cart">
+    
     <div><strong>${item.orderQuantity}</strong></div> 
     <div>${item.name}</div> 
     <div id="item-prices"><strong>$ ${item.price}</strong></div>
@@ -238,6 +267,28 @@ function displayCart(){
   }).join("");
   cartItems.innerHTML= itemHTML;
 }
+
+
+// function subtractItem(element){
+//   const itemIndex = products.findIndex(product=>{
+//     return product.id === Number(element.id)
+//   })
+
+//   products[itemIndex].orderQuantity -= 1;
+
+//   displayCart(currentItems);
+
+//   console.log(products[itemIndex]);
+
+{/* <i class="fa-solid fa-minus" onclick="subtractItem(this)" id="${item.id}"></i> */}
+
+// }
+
+
+
+
+
+
 
 
 
@@ -290,9 +341,9 @@ main.addEventListener("wheel", e=>{
       about.style.setProperty("left", `15%`);
       leftValue = 15;
     }
-    else if(leftValue >= 60){
-      about.style.left = "60%";
-      leftValue = 60;
+    else if(leftValue >= 40){
+      about.style.left = "40%";
+      leftValue = 40;
     }
     else{ 
     about.style.setProperty("left", `${leftValue}%`)

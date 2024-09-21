@@ -25,6 +25,7 @@
 
 html{
   font-family:subFont;
+  scroll-behavior: smooth;
 }
 body{
   background-color: var(--color-2);
@@ -52,7 +53,7 @@ body{
 
 main{
   transition-duration: .5s;
-  overflow: hidden;
+  
 }
 
 #header{
@@ -104,7 +105,7 @@ h1{
   gap:40px;
   margin-inline:30px;
   margin-bottom:10px;
-  
+  align-items: flex-end;
   
 }
 li{
@@ -112,7 +113,13 @@ li{
   text-wrap: nowrap;
   font-family:subFont;
   font-size: 1.2rem;
-  
+  transition-duration: .5s;
+  text-align: center;
+  margin:20px;
+}
+
+li:hover{
+  transform:scale(1.2);
 }
 
 a{
@@ -177,7 +184,7 @@ a{
 }
 
 
-#straw-video{
+#video{
   margin-top:10vh;
 }
 #straw-gif{
@@ -289,7 +296,9 @@ h2{
 }
 
 
-
+#about-container{
+  overflow: hidden;
+}
 
 #about{
   box-sizing: content-box;
@@ -316,21 +325,21 @@ h2{
 
 #cart-items{
   background-color: mistyrose;
-  width:70%;
+  width:60%;
   margin: 15px auto;
   border-radius:20px;
   display:flex;
   flex-direction: column;
   gap:10%;
   flex-wrap:no-wrap;
-  padding:8%;
+  padding:5%;
   min-height:7vh
 }
 
 #current-cart{
   display:grid;
-  grid-template-columns: 1fr 60% 1fr 1fr;
-
+  grid-template-columns: .5fr 1fr 40% 1fr 1fr;
+  
 
 }
 
@@ -353,3 +362,10 @@ h2{
   background-color: black;
 }
 
+.fa-minus:hover{
+  font-size:x-large;
+}
+
+.fa-minus:active{
+  color:red;
+}
