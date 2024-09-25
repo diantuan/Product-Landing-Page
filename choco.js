@@ -250,7 +250,7 @@ function addToCart(element){
    
   }
 
-  console.log(currentItems) 
+   
   localStorage.setItem("cart-items", JSON.stringify(currentItems));
   displayCart(currentItems);
   
@@ -260,7 +260,7 @@ function addToCart(element){
 function displayCart(itemsArray){
   const itemHTML = itemsArray.map(item=>{
     return ` <div id="current-cart">
-    
+    <i class="fa-solid fa-minus" id="${item.id}"></i>
     <div><strong>${item.orderQuantity}</strong></div> 
     <div>${item.name}</div> 
     <div id="item-prices"><strong>$ ${item.price}</strong></div>
@@ -271,22 +271,42 @@ function displayCart(itemsArray){
 }
 
 
-// function subtractItem(element){
-//   const itemIndex = products.findIndex(product=>{
-//     return product.id === Number(element.id)
-//   })
+// const subtractArray = [...document.getElementsByClassName("fa-minus")];
 
-//   products[itemIndex].orderQuantity -= 1;
+// subtractArray.forEach(element=>{
 
-//   displayCart(currentItems);
+//   element.addEventListener("click", ()=>{
+//     console.log("hello")
+//     const itemIndex = currentItems.findIndex(item=>item.id===Number(element.id));
+    
+//     currentItems[itemIndex].orderQuantity--;
+//     displayCart(currentItems);
+    
+//     })
 
-//   console.log(products[itemIndex]);
-
-{/* <i class="fa-solid fa-minus" onclick="subtractItem(this)" id="${item.id}"></i> */}
-
-// }
+// })
 
 
+
+cartItems.addEventListener("click", e => {
+  const itemIndex = currentItems.findIndex(item=> item.id === parseInt(e.target.id));
+  if(e.target.tagName === "I"){
+    currentItems[itemIndex].orderQuantity--;
+    displayCart(currentItems);
+
+    if(currentItems[itemIndex].orderQuantity <= 0){
+      currentItems.splice(itemIndex, 1);
+      displayCart(currentItems);
+    }
+   
+
+    localStorage.setItem("cart-items", JSON.stringify(currentItems));
+    if(currentItems.length < 1){
+      cartItems.textContent = "No items added";
+      localStorage.removeItem("cart-items");
+    }
+  }
+})
 
 
 
