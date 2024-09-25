@@ -13,12 +13,12 @@ function showSideNav(){
 
   if(!isSideNavOn){
     sideNav.style.marginLeft = "0";
-    main.style.marginLeft = "25%";
+    main.style.marginLeft = "50%";
     bars.style.display = "none";
     isSideNavOn = true;
   }
   else{
-    sideNav.style.marginLeft = "-25%";
+    sideNav.style.marginLeft = "-50%";
     main.style.marginLeft = "0";
     isSideNavOn = false;
   }
@@ -27,7 +27,7 @@ function showSideNav(){
 }
 
 function close(){
-  sideNav.style.marginLeft = "-25%";
+  sideNav.style.marginLeft = "-50%";
   main.style.marginLeft = "0";
   bars.style.display = "inline-block";
   isSideNavOn = false;
@@ -379,5 +379,23 @@ main.addEventListener("wheel", e=>{
   else{
     isOnTheProduct = false;
     
+  }
+})
+
+
+
+
+//checkout btn
+
+const checkoutBtn = document.getElementById("checkout");
+
+checkoutBtn.addEventListener("click", ()=>{
+  if(currentItems.length<1){
+    alert("You don't have items in your cart.")
+  }
+  else{
+    alert("Thank you for purchasing from Strawbry Chocolateria!");
+    localStorage.removeItem("cart-items")
+    location.reload();
   }
 })
