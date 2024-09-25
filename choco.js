@@ -258,28 +258,32 @@ function addToCart(element){
 
 
 function displayCart(itemsArray){
-  const itemHTML = itemsArray.map(item=>{
-    return ` <div id="current-cart">
+  const itemHTML = itemsArray.map(item=>
+    ` <div id="current-cart">
     <i class="fa-solid fa-minus" id="${item.id}"></i>
     <div><strong>${item.orderQuantity}</strong></div> 
     <div>${item.name}</div> 
     <div id="item-prices"><strong>$ ${item.price}</strong></div>
     <div>~ $${item.price*item.orderQuantity}</div>
     </div>`
-  }).join("");
+  ).join("");
   cartItems.innerHTML= itemHTML;
 }
 
 
-// const subtractArray = [...document.getElementsByClassName("fa-minus")];
+
+//THIS WONT WORK SINCE THE DISPLAYCART() FUNCTION KEEPS CHANGING THE INNER HTML AND THE EVENT LISTENERS ATTACHED TO THE SUBTRACTARRAY IS GONE
+// let subtractArray = [...document.getElementsByClassName("fa-minus")];
+
 
 // subtractArray.forEach(element=>{
+//   console.log(element.id)
 
 //   element.addEventListener("click", ()=>{
-//     console.log("hello")
-//     const itemIndex = currentItems.findIndex(item=>item.id===Number(element.id));
-    
-//     currentItems[itemIndex].orderQuantity--;
+//     console.log(element)
+//     const index = currentItems.findIndex(item=>item.id===parseInt(element.id));
+//     currentItems[index].orderQuantity--;
+//     console.log(element.id)
 //     displayCart(currentItems);
     
 //     })
@@ -288,6 +292,7 @@ function displayCart(itemsArray){
 
 
 
+//adding event listener to the parent div using Event Delegation for the subtract button
 cartItems.addEventListener("click", e => {
   const itemIndex = currentItems.findIndex(item=> item.id === parseInt(e.target.id));
   if(e.target.tagName === "I"){
